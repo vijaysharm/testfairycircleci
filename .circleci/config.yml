@@ -2,12 +2,16 @@ version: 2.1
 
 orbs:
  android: circleci/android@0.2.0
+ testfairy: vijaysharm/testfairy-circleci-upload@dev:0.0.1
 
 jobs:
   build:
     executor: android/android
-        
+
     steps:
       - checkout
       - run:
           command: ./gradlew build
+      - testfairy/uploader:
+          api-key: d9ba4414aaa88cdecee6631d37d392d0361778be
+          file: ./app/build/outputs/apk/debug/app-debug.apk
